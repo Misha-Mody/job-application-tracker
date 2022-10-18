@@ -1,20 +1,5 @@
 {
-  "name": "job-application-manager",
-  "version": "1.0.0",
-  "description": "A software to track and manage applied jobs, interviews and online assessments. Lets users make an online resume.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "job",
-    "application",
-    "tracker",
-    "resume",
-    "online",
-    "jobs",
-    "apply"
-  ],
-  "author": "Misha and Sadiya",
-  "license": "MIT"
+  "dependencies": {
+    "ejs": "^3.1.8"
+  }
 }
