@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../template/head.ejs") %>
+        <link href="stylesheets/applied.css" rel="stylesheet" type="text/css" />
+        <script src="javascripts/applied.js" defer></script>
+
+</head>
+
+<body>
+    <%- include("../template/navbar.ejs") %>
+
+        <div class="container">
+            <div class="row mt-5 text-center">
+                <h1>MY APPLICATIONS</h1>
+            </div>
+
+            <div class="row mt-5">
+
+                <div class="col-sm-12 col-lg-3">
+                    <div class="column-box">
+                        <h3 class="title">Applied</h3>
+                        <div class="card droppable border-info mb-3"> </div>
+                        <% jobs.filter((j)=> j.phase == 1).forEach((job)=>{ %>
+                            <div class="card draggable border-info mb-3" draggable="true">
+                                <i class="fa-solid fa-bars icon drag"></i>
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="images/<%= job.img %>" class="img-fluid rounded-start"
+                                            alt="company logo">
+                                    </div>
+                                    <div class="col-md-8">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= job.company %>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                <%= job.posname %>
+                                            </h6>
+                                            <p class="card-text">
+                                                <b>Applied Date:</b>
+                                                <%= job.applieddate %>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <i class="fa-solid fa-trash icon delete"></i>
+
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="column-box">
+                        <h3 class="title">Online Assessment</h3>
+                        <div class="card droppable border-info mb-3"> </div>
+                        <% jobs.filter((j)=> j.phase == 2).forEach((job)=>{ %>
+                            <div class="card draggable border-info mb-3" draggable="true">
+                                <i class="fa-solid fa-bars icon drag"></i>
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="images/<%= job.img %>" class="img-fluid rounded-start"
+                                            alt="company logo">
+                                    </div>
+                                    <div class="col-md-8">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= job.company %>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                <%= job.posname %>
+                                            </h6>
+                                            <p class="card-text">
+                                                <b>Assessment Deadline:</b>
+                                                <%= job.assessmentdate %>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <i class="fa-solid fa-trash icon delete"></i>
+
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="column-box">
+                        <h3 class="title">Scheduled Interview</h3>
+                        <div class="card droppable border-info mb-3"> </div>
+                        <% jobs.filter((j)=> j.phase == 3).forEach((job)=>{ %>
+                            <div class="card draggable border-info mb-3" draggable="true">
+                                <i class="fa-solid fa-bars icon drag"></i>
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="images/<%= job.img %>" class="img-fluid rounded-start"
+                                            alt="company logo">
+                                    </div>
+                                    <div class="col-md-8">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= job.company %>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                <%= job.posname %>
+                                            </h6>
+                                            <p class="card-text">
+                                                <b>Applied Date:</b>
+                                                <%= job.interviewdate %>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <i class="fa-solid fa-trash icon delete"></i>
+
+                            </div>
+                            <% }) %>
+
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <div class="column-box">
+                        <h3 class="title">Accept/Reject</h3>
+                        <div class="card droppable border-info mb-3"> </div>
+                        <% jobs.filter((j)=> j.phase == 4).forEach((job)=>{ %>
+                            <div class="card draggable border-info mb-3" draggable="true">
+                                <i class="fa-solid fa-bars icon drag"></i>
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="images/<%= job.img %>" class="img-fluid rounded-start"
+                                            alt="company logo">
+                                    </div>
+                                    <div class="col-md-8">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= job.company %>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                <%= job.posname %>
+                                            </h6>
+                                            <p class="card-text">
+                                                <b>Status:</b>
+                                                <%= job.status %>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <i class="fa-solid fa-trash icon delete"></i>
+
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+</body>
+
+</html>
