@@ -8,3 +8,4 @@ A software to track and manage applied jobs, interviews and online assessments. 
 2. `cd job-application-tracker/job-application-tracker`
 4. `npm install`
 5. `npm start`
+6.  Go to browser -> [Localhost- 3000](http://localhost:3000)
