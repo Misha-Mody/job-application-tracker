@@ -6,13 +6,16 @@ let draggedItem = null;
 for (let i = 0; i < cards.length; i++) {
   const item = cards[i];
 
-  item.addEventListener("dragstart", function () {
+  item.addEventListener("dragstart", function (ev) {
     draggedItem = item;
     setTimeout(function () {
       draggedItem.style.display = "none";
       for (let box of emptybox) {
         box.style.display = "block";
       }
+      ev.dataTransfer.clearData();
+      console.log(ev.target.id);
+      ev.dataTransfer.setData("text/plain", ev.target.id);
     }, 0);
   });
 
@@ -25,18 +28,20 @@ for (let i = 0; i < cards.length; i++) {
       }
     }, 0);
   });
+}
+for (let j = 0; j < columns.length; j++) {
+  const col = columns[j];
+  col.addEventListener("dragover", function (e) {
+    e.preventDefault();
+  });
+  col.addEventListener("dragenter", function (e) {
+    e.preventDefault();
+  });
 
-  for (let j = 0; j < columns.length; j++) {
-    const col = columns[j];
-    col.addEventListener("dragover", function (e) {
-      e.preventDefault();
-    });
-    col.addEventListener("dragenter", function () {
-      e.preventDefault();
-    });
-
-    col.addEventListener("drop", function () {
-      this.append(draggedItem);
-    });
-  }
+  col.addEventListener("drop", function (ev) {
+    this.append(draggedItem);
+    ev.dataTransfer.clearData();
+    console.log(ev.target.id);
+    ev.dataTransfer.setData("text/plain", ev.target.id);
+  });
 }

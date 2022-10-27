@@ -21,7 +21,7 @@ router.get("/applied", function (req, res, next) {
       img: "c1.png",
     },
     {
-      jobid: "1",
+      jobid: "2",
       company: "Palo Alto Networks",
       posname: "Software Engineer",
       applieddate: "Oct 18th, 2022",
@@ -32,7 +32,7 @@ router.get("/applied", function (req, res, next) {
       img: "c1.png",
     },
     {
-      jobid: "1",
+      jobid: "3",
       company: "Google",
       posname: "Software Engineer",
       applieddate: "Oct 18th, 2022",
@@ -43,7 +43,7 @@ router.get("/applied", function (req, res, next) {
       img: "c1.png",
     },
     {
-      jobid: "1",
+      jobid: "4",
       company: "Amazon",
       posname: "Software Engineer",
       applieddate: "Oct 18th, 2022",
@@ -54,7 +54,7 @@ router.get("/applied", function (req, res, next) {
       img: "c1.png",
     },
     {
-      jobid: "1",
+      jobid: "5",
       company: "MongoDB",
       posname: "Software Engineer",
       applieddate: "Oct 18th, 2022",
