@@ -3,7 +3,24 @@ body{
 }
 h1{
     font-family: initial;
+    margin-left: auto;
 }
+
+.heading{
+    display: flex;
+    justify-content: center;
+}
+
+.plus-icon{
+    margin-left: auto;
+    padding: 10px 20px;
+    border-radius: 50%;
+    font-size: 35px;
+    position: relative;
+    top: -27px;
+    right: -1px;
+}
+
 .title{
     color: #716c6c;
     font-variant: all-petite-caps;
@@ -14,7 +31,7 @@ h1{
 .column-box{
     background-color: #45cbcb52;
     margin: auto;
-    height: 1000px;
+    height: auto;
     padding: 10px;
     text-align: center;
     display: flex;
@@ -63,16 +80,19 @@ h1{
 
 .icon{
     position: absolute;
-    right: 5px;
-    font-size: 12px;
+    right: 6px;
+    font-size: 8px;
 }
 
 .drag{
-    top: 5px;
+    top: 6px;
 }
 
 .delete{
-  bottom: 5px;
+    bottom: 5px;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    padding: 5px;
 }
 
 
@@ -91,4 +111,11 @@ h1{
     border-width: 5px;
     transform: scale(1.1);
   }
+
+
+  /* FORM */
+
+input{
+    margin-top: -7px;
+}
 

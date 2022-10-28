@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "A software to track and manage applied jobs, interviews and online assessments. Lets users make an online resume.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "npm run test",
+    "initdb": "mongoimport -d jobtracker -c company --jsonArray --file data/companydata.json",
     "start": "nodemon ./bin/www"
   },
   "keywords": [
@@ -21,10 +23,8 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "ejs": "^3.1.8",
     "express": "^4.18.2",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
     "mongodb": "^4.10.0",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.20"
