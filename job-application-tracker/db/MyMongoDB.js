@@ -8,42 +8,88 @@ export function MyMongoDB() {
 
   // get jobs
 
-  myDB.getAppliedCompany = async () => {
+  myDB.getAppliedCompany = async (query, page, pageSize) => {
     let client;
     try {
       client = new MongoClient(mongoURL);
       const col = client.db(DB_NAME).collection(COL_NAME);
-      return await col.find({ phase: 1 }).sort({ jobid: -1 }).toArray();
+      return await col
+        .find({ phase: 1, company: new RegExp(query) })
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .sort({ jobid: -1 })
+        .toArray();
     } finally {
       client.close();
     }
   };
-  myDB.getAssessmentCompany = async () => {
+  myDB.getAssessmentCompany = async (query, page, pageSize) => {
     let client;
     try {
       client = new MongoClient(mongoURL);
       const col = client.db(DB_NAME).collection(COL_NAME);
-      return await col.find({ phase: 2 }).sort({ jobid: -1 }).toArray();
+      return await col
+        .find({ phase: 2, company: new RegExp(query) })
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .sort({ jobid: -1 })
+        .toArray();
     } finally {
       client.close();
     }
   };
-  myDB.getInterviewCompany = async () => {
+  myDB.getInterviewCompany = async (query, page, pageSize) => {
     let client;
     try {
       client = new MongoClient(mongoURL);
       const col = client.db(DB_NAME).collection(COL_NAME);
-      return await col.find({ phase: 3 }).sort({ jobid: -1 }).toArray();
+      return await col
+        .find({ phase: 3, company: new RegExp(query) })
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .sort({ jobid: -1 })
+        .toArray();
     } finally {
       client.close();
     }
   };
-  myDB.getStatusCompany = async () => {
+  myDB.getStatusCompany = async (query, page, pageSize) => {
     let client;
     try {
       client = new MongoClient(mongoURL);
       const col = client.db(DB_NAME).collection(COL_NAME);
-      return await col.find({ phase: 4 }).sort({ jobid: -1 }).toArray();
+      return await col
+        .find({ phase: 4, company: new RegExp(query) })
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .sort({ jobid: -1 })
+        .toArray();
+    } finally {
+      client.close();
+    }
+  };
+
+  // get job by id
+  myDB.getJob = async (jobid) => {
+    let client;
+    try {
+      client = new MongoClient(mongoURL);
+      const col = client.db(DB_NAME).collection(COL_NAME);
+      return await col.find({ jobid: parseInt(jobid) }).toArray();
+    } finally {
+      client.close();
+    }
+  };
+
+  // get counts
+
+  const getJobCount = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(mongoURL);
+      const col = client.db(DB_NAME).collection(COL_NAME);
+      const count = await col.countDocuments();
+      return count;
     } finally {
       client.close();
     }
@@ -55,30 +101,14 @@ export function MyMongoDB() {
     try {
       client = new MongoClient(mongoURL);
       const col = client.db(DB_NAME).collection(COL_NAME);
-      console.log("here2", jobid);
       await col.deleteOne({ jobid: parseInt(jobid) });
-      console.log("done");
       return;
     } finally {
       client.close();
     }
   };
 
-  const getJobCount = async () => {
-    let client;
-    try {
-      client = new MongoClient(mongoURL);
-      const col = client.db(DB_NAME).collection(COL_NAME);
-      const count = await col.find().count();
-      console.log(count);
-      return count;
-    } finally {
-      client.close();
-    }
-  };
-
   // create job
-
   myDB.createJob = async (job) => {
     let client;
     try {
@@ -100,13 +130,47 @@ export function MyMongoDB() {
     }
   };
 
-  // get job by id
-  myDB.getJob = async (jobid) => {
+  //update job
+  myDB.updateJob = async (jobid, job) => {
     let client;
     try {
       client = new MongoClient(mongoURL);
       const col = client.db(DB_NAME).collection(COL_NAME);
-      return await col.find({ jobid: jobid });
+      return await col.updateOne(
+        { jobid: parseInt(jobid) },
+        {
+          $set: {
+            jobid: (await getJobCount()) + 1,
+            company: job.company,
+            posname: job.posname,
+            applieddate: job.applieddate,
+            assessmentdate: job.assessmentdate,
+            interviewdate: job.interviewdate,
+            status: job.status,
+            phase: parseInt(job.phase),
+            img: job.img,
+          },
+        }
+      );
+    } finally {
+      client.close();
+    }
+  };
+
+  // update status
+  myDB.updateJobPhase = async (jobid, phase) => {
+    let client;
+    try {
+      client = new MongoClient(mongoURL);
+      const col = client.db(DB_NAME).collection(COL_NAME);
+      return await col.updateOne(
+        { jobid: parseInt(jobid) },
+        {
+          $set: {
+            phase: parseInt(phase),
+          },
+        }
+      );
     } finally {
       client.close();
     }

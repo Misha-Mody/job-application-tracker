@@ -1,0 +1,24 @@
+[
+    {
+      "userId": 1,
+      "name": "Michael Scott",
+      "email": "m.scott@dundermifflin.com",
+      "address": "scranton, PA",
+      "about": "Regional Managaer DM scranton",
+      "skills": "sales, jokes",
+      "hobbies": "Improv",
+      "education": [
+        {"e_name":"abc school","edu_start":"1980","edu_end":"1990"},
+        {"e_name":"xyz uni","edu_start":"1991","edu_end":"1993"}
+                    ],
+      "experience": [
+        {"e_name":"abc school","edu_start":"1980","edu_end":"1990"},
+        {"e_name":"xyz uni","edu_start":"1991","edu_end":"1993"}
+                    ],
+      "project": [
+        {"e_name":"abc school","edu_start":"1980","edu_end":"1990"},
+        {"e_name":"xyz uni","edu_start":"1991","edu_end":"1993"}
+                ],
+      "profile_img": "http://dummyimage.com/203x100.png/5fa2dd/ffffff"
+    }
+]
