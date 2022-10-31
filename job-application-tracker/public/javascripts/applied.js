@@ -18,7 +18,7 @@ currentPage3 = 1;
 paginationLimit3 = 10;
 currentPage4 = 1;
 paginationLimit4 = 10;
-q = "";
+const q = "";
 
 // javascript rendering of the card
 
@@ -31,7 +31,7 @@ async function fetchAppliedJobs(currentPage, paginationLimit, q) {
       "&total=" +
       paginationLimit +
       "&q=" +
-      q
+      (q == undefined ? "" : q)
   );
 
   const jobs = await res.json();
@@ -101,7 +101,7 @@ async function fetchAppliedJobs(currentPage, paginationLimit, q) {
   const pagination = document.createElement("div");
   pagination.className = "pagination-container";
   pagination.innerHTML = `
-  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},1,${q}" id=${
+  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},1,q" id=${
     currentPage == 1 ? "disabled" : ""
   } id="prev-button-1" title="Previous page"
       aria-label="Previous page">
@@ -109,7 +109,7 @@ async function fetchAppliedJobs(currentPage, paginationLimit, q) {
   </button>
   ${currentPage}
   <button class="pagination-button" 
-     onClick="next(${currentPage},${paginationLimit},1,${q})" id="next-button-1" title="Next page" aria-label="Next page">
+     onClick="next(${currentPage},${paginationLimit},1,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
   `;
@@ -123,7 +123,7 @@ async function fetchAssessmentJobs(currentPage, paginationLimit, q) {
       "&total=" +
       paginationLimit +
       "&q=" +
-      q
+      (q == undefined ? "" : q)
   );
   const jobs = await res.json();
   const assessment = document.getElementById("col2");
@@ -189,7 +189,7 @@ async function fetchAssessmentJobs(currentPage, paginationLimit, q) {
   const pagination = document.createElement("div");
   pagination.className = "pagination-container";
   pagination.innerHTML = `
-  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},2,${q})" id=${
+  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},2,q)" id=${
     currentPage == 1 ? "disabled" : ""
   } id="prev-button-1" title="Previous page"
       aria-label="Previous page">
@@ -197,7 +197,7 @@ async function fetchAssessmentJobs(currentPage, paginationLimit, q) {
   </button>
   ${currentPage}
   <button class="pagination-button" 
-     onClick="next(${currentPage},${paginationLimit},2,${q})" id="next-button-1" title="Next page" aria-label="Next page">
+     onClick="next(${currentPage},${paginationLimit},2,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
   `;
@@ -210,7 +210,7 @@ async function fetchInterviewJobs(currentPage, paginationLimit, q) {
       "&total=" +
       paginationLimit +
       "&q=" +
-      q
+      (q == undefined ? "" : q)
   );
   const jobs = await res.json();
   const interview = document.getElementById("col3");
@@ -276,7 +276,7 @@ async function fetchInterviewJobs(currentPage, paginationLimit, q) {
   const pagination = document.createElement("div");
   pagination.className = "pagination-container";
   pagination.innerHTML = `
-  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},3,${q})" id=${
+  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},3,q)" id=${
     currentPage == 1 ? "disabled" : ""
   } id="prev-button-1" title="Previous page"
       aria-label="Previous page">
@@ -284,7 +284,7 @@ async function fetchInterviewJobs(currentPage, paginationLimit, q) {
   </button>
   ${currentPage}
   <button class="pagination-button" 
-     onClick="next(${currentPage},${paginationLimit},3,${q})" id="next-button-1" title="Next page" aria-label="Next page">
+     onClick="next(${currentPage},${paginationLimit},3,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
   `;
@@ -297,7 +297,7 @@ async function fetchStatusJobs(currentPage, paginationLimit, q) {
       "&total=" +
       paginationLimit +
       "&q=" +
-      q
+      (q == undefined ? "" : q)
   );
   const jobs = await res.json();
   const status = document.getElementById("col4");
@@ -363,7 +363,7 @@ async function fetchStatusJobs(currentPage, paginationLimit, q) {
   const pagination = document.createElement("div");
   pagination.className = "pagination-container";
   pagination.innerHTML = `
-  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},4,${q})" id=${
+  <button class="pagination-button" onClick="prev(${currentPage},${paginationLimit},4,q)" id=${
     currentPage == 1 ? "disabled" : ""
   } id="prev-button-1" title="Previous page"
       aria-label="Previous page">
@@ -371,7 +371,7 @@ async function fetchStatusJobs(currentPage, paginationLimit, q) {
   </button>
   ${currentPage}
   <button class="pagination-button" 
-     onClick="next(${currentPage},${paginationLimit},4,${q})" id="next-button-1" title="Next page" aria-label="Next page">
+     onClick="next(${currentPage},${paginationLimit},4,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
   `;
