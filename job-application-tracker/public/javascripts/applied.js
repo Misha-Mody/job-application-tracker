@@ -424,7 +424,6 @@ async function openModalEdit(jobid) {
   const res = await fetch("/get/" + jobid);
   const job = await res.json();
   const myjob = job[0];
-  console.log(myjob);
   let process = String(myjob.phase);
   if (myjob.phase == 4 && myjob.status == "Selected") {
     process == "5";
@@ -521,7 +520,7 @@ window.onload = function () {
         colid = this.id.substr(this.id.length - 1);
         cardid = draggedItem.id;
         await fetch("/update/" + cardid + "/" + colid);
-        console.log(colid, cardid);
+
         location.reload();
       }
     });

@@ -1,5 +1,6 @@
 import express from "express";
 import myDB from "../db/MyMongoDB.js";
+import userDB from "../db/MyUserDB.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -12,14 +13,9 @@ const router = express.Router();
 
 router.use("/", userRoute);
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../views/index.html"));
-});
-
 /* GET applied jobs page. */
 router.get("/applied", async function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../views/applied.html"));
+  res.sendFile(path.join(__dirname + "/../public/applied.html"));
 });
 
 // get jobs
@@ -79,6 +75,9 @@ router.post("/createJob", async (req, res) => {
   job["phase"] = phase;
   job["img"] = "http://dummyimage.com/189x100.png/5fa2dd/ffffff";
   delete job.process;
+  job["applieddate"] = formatDate(job["applieddate"]);
+  job["assessmentdate"] = formatDate(job["assessmentdate"]);
+  job["interviewdate"] = formatDate(job["interviewdate"]);
 
   await myDB.createJob(job);
 
@@ -111,11 +110,9 @@ router.post("/update/:jobid", async (req, res) => {
   job["phase"] = phase;
   delete job.process;
   job["img"] = "http://dummyimage.com/189x100.png/5fa2dd/ffffff";
-
   job["applieddate"] = formatDate(job["applieddate"]);
   job["assessmentdate"] = formatDate(job["assessmentdate"]);
   job["interviewdate"] = formatDate(job["interviewdate"]);
-  console.log(job);
   await myDB.updateJob(jobid, job);
   res.redirect("/applied");
 });
