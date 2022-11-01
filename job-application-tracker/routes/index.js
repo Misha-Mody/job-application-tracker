@@ -4,7 +4,7 @@ import userDB from "../db/MyUserDB.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import path from "path";
-import userRoute from "./users.js"
+import userRoute from "./user.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,20 +19,38 @@ router.get("/applied", async function (req, res, next) {
   res.sendFile(path.join(__dirname + "/../views/applied.html"));
 });
 
+// get jobs
+
 router.get("/getAppliedjobs", async (req, res) => {
-  const jobs = await myDB.getAppliedCompany();
+  const query = req.query.q || "";
+  const page = +req.query.page || 1;
+  const pageSize = +req.query.total || 10;
+  // let total = await myDB.getJobCount(query);
+  const jobs = await myDB.getAppliedCompany(query, page, pageSize);
   return res.json(jobs);
 });
 router.get("/getAssessmentjobs", async (req, res) => {
-  const jobs = await myDB.getAssessmentCompany();
+  const query = req.query.q || "";
+  const page = +req.query.page || 1;
+  const pageSize = +req.query.total || 10;
+  // let total = await myDB.getRestaurantCount(query);
+  const jobs = await myDB.getAssessmentCompany(query, page, pageSize);
   return res.json(jobs);
 });
 router.get("/getInterviewjobs", async (req, res) => {
-  const jobs = await myDB.getInterviewCompany();
+  const query = req.query.q || "";
+  const page = +req.query.page || 1;
+  const pageSize = +req.query.total || 10;
+  // let total = await myDB.getRestaurantCount(query);
+  const jobs = await myDB.getInterviewCompany(query, page, pageSize);
   return res.json(jobs);
 });
 router.get("/getStatusjobs", async (req, res) => {
-  const jobs = await myDB.getStatusCompany();
+  const query = req.query.q || "";
+  const page = +req.query.page || 1;
+  const pageSize = +req.query.total || 10;
+  // let total = await myDB.getRestaurantCount(query);
+  const jobs = await myDB.getStatusCompany(query, page, pageSize);
   return res.json(jobs);
 });
 
@@ -40,7 +58,6 @@ router.get("/getStatusjobs", async (req, res) => {
 
 router.get("/delete/:jobid", async (req, res) => {
   const jobid = req.params.jobid;
-  console.log("here", jobid);
   await myDB.deleteJob(jobid);
   res.redirect("/applied");
 });
@@ -81,5 +98,30 @@ router.get("/getUsers", async (req, res) => {
   return res.json(userList);
 });
 
+//update job
+router.post("/update/:jobid", async (req, res) => {
+  const jobid = req.params.jobid;
+  const job = req.body;
+  let phase = parseInt(job.process);
+  let status = "Not Selected";
+  if (job.process == "5") {
+    phase = 4;
+    status = "Selected";
+  }
+  job["status"] = status;
+  job["phase"] = phase;
+  delete job.process;
+  job["img"] = "http://dummyimage.com/189x100.png/5fa2dd/ffffff";
+  await myDB.updateJob(jobid, job);
+  res.redirect("/applied");
+});
+
+// update job phase
+router.get("/update/:jobid/:phase", async (req, res) => {
+  const jobid = req.params.jobid;
+  const phase = req.params.phase;
+  await myDB.updateJobPhase(jobid, phase);
+  res.redirect("/applied");
+});
 
 export default router;
