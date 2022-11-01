@@ -11,12 +11,11 @@ const __dirname = dirname(__filename);
 
 const router = express.Router();
 
-router.use("/",userRoute);
-
+router.use("/", userRoute);
 
 /* GET applied jobs page. */
 router.get("/applied", async function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../views/applied.html"));
+  res.sendFile(path.join(__dirname + "/../public/applied.html"));
 });
 
 // get jobs
@@ -76,6 +75,9 @@ router.post("/createJob", async (req, res) => {
   job["phase"] = phase;
   job["img"] = "http://dummyimage.com/189x100.png/5fa2dd/ffffff";
   delete job.process;
+  job["applieddate"] = formatDate(job["applieddate"]);
+  job["assessmentdate"] = formatDate(job["assessmentdate"]);
+  job["interviewdate"] = formatDate(job["interviewdate"]);
 
   await myDB.createJob(job);
 
@@ -89,14 +91,10 @@ router.get("/get/:jobid", async (req, res) => {
   return res.json(job);
 });
 
-
-//get user list
-router.get("/getUsers", async (req, res) => {
-  console.log("4i");
-  console.log("in routes");
-  const userList = await userDB.getUsers();
-  return res.json(userList);
-});
+function formatDate(date) {
+  let d = date.split("-");
+  return d[1] + "/" + d[2] + "/" + d[0];
+}
 
 //update job
 router.post("/update/:jobid", async (req, res) => {
@@ -112,6 +110,9 @@ router.post("/update/:jobid", async (req, res) => {
   job["phase"] = phase;
   delete job.process;
   job["img"] = "http://dummyimage.com/189x100.png/5fa2dd/ffffff";
+  job["applieddate"] = formatDate(job["applieddate"]);
+  job["assessmentdate"] = formatDate(job["assessmentdate"]);
+  job["interviewdate"] = formatDate(job["interviewdate"]);
   await myDB.updateJob(jobid, job);
   res.redirect("/applied");
 });

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "npm run test",
-    "initdb": "mongoimport -d jobtracker -c company --jsonArray --file data/companydata.json",
+    "initdb":
+      "mongoimport -d jobtracker -c company --jsonArray --file data/companydata.json & mongoimport -d jobtracker -c users --jsonArray --file data/userData.json",
     "start": "nodemon ./bin/www"
   },
   "keywords": [

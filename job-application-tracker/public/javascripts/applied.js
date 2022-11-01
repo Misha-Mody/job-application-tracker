@@ -11,13 +11,13 @@ if (is_modal_show != "alredy shown") {
 
 // pagination
 currentPage = 1;
-paginationLimit = 10;
+paginationLimit = 5;
 currentPage2 = 1;
-paginationLimit2 = 10;
+paginationLimit2 = 5;
 currentPage3 = 1;
-paginationLimit3 = 10;
+paginationLimit3 = 5;
 currentPage4 = 1;
-paginationLimit4 = 10;
+paginationLimit4 = 5;
 const q = "";
 
 // javascript rendering of the card
@@ -430,25 +430,27 @@ async function openModalEdit(jobid) {
   }
   const jobModal = document.getElementById("editJobModal");
 
-  jobModal.addEventListener("show.bs.modal", (e) => {
-    document.querySelector("#company").setAttribute("value", myjob.company);
+  // jobModal.addEventListener("show.bs.modal", (e) => {
 
-    document.querySelector("#posname").setAttribute("value", myjob.posname);
+  document.querySelector("#company").setAttribute("value", myjob.company);
 
-    document
-      .querySelector("#applieddate")
-      .setAttribute("value", formatDate(myjob.applieddate));
-    document
-      .querySelector("#assessmentdate")
-      .setAttribute("value", formatDate(myjob.assessmentdate));
-    document
-      .querySelector("#interviewdate")
-      .setAttribute("value", formatDate(myjob.interviewdate));
+  document.querySelector("#posname").setAttribute("value", myjob.posname);
 
-    let d = document.querySelector("#process");
-    d.value = process;
-    document.getElementById("editjob").action = "/update/" + myjob.jobid;
-  });
+  document
+    .querySelector("#applieddate")
+    .setAttribute("value", formatDate(myjob.applieddate));
+  document
+    .querySelector("#assessmentdate")
+    .setAttribute("value", formatDate(myjob.assessmentdate));
+  document
+    .querySelector("#interviewdate")
+    .setAttribute("value", formatDate(myjob.interviewdate));
+
+  let d = document.querySelector("#process");
+  d.value = process;
+  document.getElementById("editjob").action = "/update/" + myjob.jobid;
+
+  // });
 
   let myModal = new bootstrap.Modal(jobModal);
   myModal.show();
@@ -517,8 +519,9 @@ window.onload = function () {
         parentDiv.insertBefore(draggedItem, sp2.nextSibling);
         colid = this.id.substr(this.id.length - 1);
         cardid = draggedItem.id;
-        // await fetch("/update/" + cardid + "/" + colid);
-        // location.reload();
+        await fetch("/update/" + cardid + "/" + colid);
+
+        location.reload();
       }
     });
   }
