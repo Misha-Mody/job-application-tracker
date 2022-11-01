@@ -92,6 +92,11 @@ router.get("/get/:jobid", async (req, res) => {
   return res.json(job);
 });
 
+function formatDate(date) {
+  let d = date.split("-");
+  return d[1] + "/" + d[2] + "/" + d[0];
+}
+
 //update job
 router.post("/update/:jobid", async (req, res) => {
   const jobid = req.params.jobid;
@@ -106,6 +111,11 @@ router.post("/update/:jobid", async (req, res) => {
   job["phase"] = phase;
   delete job.process;
   job["img"] = "http://dummyimage.com/189x100.png/5fa2dd/ffffff";
+
+  job["applieddate"] = formatDate(job["applieddate"]);
+  job["assessmentdate"] = formatDate(job["assessmentdate"]);
+  job["interviewdate"] = formatDate(job["interviewdate"]);
+  console.log(job);
   await myDB.updateJob(jobid, job);
   res.redirect("/applied");
 });
