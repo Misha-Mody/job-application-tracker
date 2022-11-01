@@ -36,7 +36,7 @@ function UserFunctions() {
     const divContent = document.querySelector("#profile");
 
     for (let p in profile) {
-      if (p == "_id" || p == "userId") continue;
+      if (p == "_id" || p == "id") continue;
       const cardDiv = document.createElement("div");
       cardDiv.className = "card col-md-12 col-sm-1";
       let header = p.toUpperCase();
@@ -80,7 +80,7 @@ function UserFunctions() {
       cardDiv.className = "form-group";
       let header = p.toUpperCase();
 
-      if (p == "_id" || p == "userId") {
+      if (p == "_id" || p == "id") {
         cardDiv.innerHTML =
           // <label type="hidden" for=${p}>${header}</label/>
           `<input type="hidden" name=${p} class="form-control" id=${p} value="${profile[p]}">`;
