@@ -1,5 +1,6 @@
 import express from "express";
 import myDB from "../db/MyMongoDB.js";
+import userDB from "../db/MyUserDB.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -10,12 +11,8 @@ const __dirname = dirname(__filename);
 
 const router = express.Router();
 
-router.use("/", userRoute);
+router.use("/",userRoute);
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../views/index.html"));
-});
 
 /* GET applied jobs page. */
 router.get("/applied", async function (req, res, next) {
@@ -90,6 +87,15 @@ router.get("/get/:jobid", async (req, res) => {
   const jobid = req.params.jobid;
   const job = await myDB.getJob(jobid);
   return res.json(job);
+});
+
+
+//get user list
+router.get("/getUsers", async (req, res) => {
+  console.log("4i");
+  console.log("in routes");
+  const userList = await userDB.getUsers();
+  return res.json(userList);
 });
 
 //update job
