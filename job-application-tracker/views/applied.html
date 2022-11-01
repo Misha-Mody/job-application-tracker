@@ -46,7 +46,19 @@
             </div>
         </div>
 
-        <!-- modal -->
+        <div class="row mt-3 text-center">
+            <span><input id="searchid" class="search-input" type="text" placeholder="Search for a company ..">
+                <button type="button" class="btn btn-warning" onClick="Onsearch()"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="button" class="btn btn-warning" onClick="ClearInput()"> Clear</button>
+            </span>
+            </form>
+        </div>
+
+
+
+
+        <!-- modal add job -->
         <div class="modal fade" id="addJobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl  modal-dialog-centered">
                 <div class="modal-content shadow-lg">
@@ -115,7 +127,7 @@
                                 <div class="col-sm-12 col-lg-6">
                                     <select name="process" class="form-select form-control" aria-label="select status">
                                         <option selected value="1">Applied</option>
-                                        <option value="2">Receieved Assessment</option>
+                                        <option value="2">Received Assessment</option>
                                         <option value="3">Scheduled Interview</option>
                                         <option value="4">Not Selected</option>
                                         <option value="5">Selected</option>
@@ -125,7 +137,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">ADD APLICATION</button>
                     </div>
 
                     </form>
@@ -133,20 +145,161 @@
                 </div>
             </div>
         </div>
+        <!-- modal edit job -->
+        <div class="modal fade" id="editJobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl  modal-dialog-centered">
+                <div class="modal-content shadow-lg">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-muted" id="exampleModalLabel">EDIT JOB APPLICATION</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="/edit" id="editjob" method="POST">
+
+                            <!-- company -->
+                            <div class="row mt-3">
+                                <div class="col-sm-12 col-lg-2">
+                                    <label class="form-label">Company : </label>
+                                </div>
+                                <div class="col-sm-12 col-lg-8"> <input type="text" required="true" name="company"
+                                        id="company" class="form-control" />
+                                </div>
+                            </div>
+
+                            <!-- postion -->
+                            <div class="row mt-5">
+                                <div class="col-sm-12 col-lg-2">
+                                    <label class="form-label">Position : </label>
+                                </div>
+                                <div class="col-sm-12 col-lg-8"> <input type="text" required="true" name="posname"
+                                        id="posname" class="form-control" />
+                                </div>
+                            </div>
+
+                            <!-- dates row  -->
+                            <div class="row mt-5">
+                                <div class="col-sm-12 col-lg-4">
+                                    <div class="row">
+                                        <div class="col-6"><label class="form-label">Application Date : </label>
+                                        </div>
+                                        <div class="col-6"> <input type="date" required="true" name="applieddate"
+                                                id="applieddate" class="form-control" /></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-4">
+                                    <div class="row">
+                                        <div class="col-6 text-end"><label class="form-label">Assessment Date: </label>
+                                        </div>
+                                        <div class="col-6"> <input type="date" name="assessmentdate" id="assessmentdate"
+                                                class="form-control" /></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="row">
+                                        <div class="col-6 text-end"><label class="form-label">Interview Date: </label>
+                                        </div>
+                                        <div class="col-6"> <input type="date" name="interviewdate" id="interviewdate"
+                                                class="form-control" /></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- status row -->
+                            <div class="row mt-5">
+                                <div class="col-sm-12 col-lg-2">
+                                    <label class="form-label">Status: </label>
+                                </div>
+                                <div class="col-sm-12 col-lg-6">
+                                    <select name="process" id="process" class="form-select form-control"
+                                        aria-label="select status">
+                                        <option selected value="1">Applied</option>
+                                        <option value="2">Received Assessment</option>
+                                        <option value="3">Scheduled Interview</option>
+                                        <option value="4">Not Selected</option>
+                                        <option value="5">Selected</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">SAVE CHANGES</button>
+                    </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- start modal -->
+        <div class="modal fade" id="startModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl  modal-dialog-centered">
+                <div class="modal-content shadow-lg">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-muted" id="exampleModalLabel">START GUIDE</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="text-center col-sm-12 col-lg-4">
+                                <div class="blue-circle"><i class="fa fa-solid fa-plus"></i></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-8">
+                                <p class="inst-text">Click the top right plus button to add a new job application entry.
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mt-5">
+                            <div class="text-center col-sm-12 col-lg-4">
+                                <div class="edit-button"><i class="fa-solid fa-pen"></i></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-8">
+                                <p class="inst-text">Click on the pen icon of each card to edit.</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mt-5">
+                            <div class="text-center col-sm-12 col-lg-4">
+                                <div class="delete-button"><i class="fa-solid fa-trash"></i></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-8">
+                                <p class="inst-text">Click on the trash icon to permanently remove an entry.</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mt-5">
+                            <div class="text-center col-sm-12 col-lg-4">
+                                <div class="card-icon"><i class="fa-solid fa-address-card"></i></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-8">
+                                <p class="inst-text">Drag and drop the card icon to place it in any column.</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row mt-5">
 
             <div class="col-sm-12 col-lg-3">
-                <div id="col1" class="column-box"></div>
+                <div id="col1" class="column-box"> </div>
             </div>
             <div class="col-sm-12 col-lg-3">
                 <div id="col2" class="column-box"></div>
             </div>
             <div class="col-sm-12 col-lg-3">
-                <div id="col3" class="column-box"></div>
+                <div id="col3" class="column-box"> </div>
             </div>
             <div class="col-sm-12 col-lg-3">
-                <div id="col4" class="column-box"></div>
+                <div id="col4" class="column-box"> </div>
             </div>
 
         </div>
