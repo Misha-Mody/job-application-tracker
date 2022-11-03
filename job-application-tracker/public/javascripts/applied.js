@@ -89,7 +89,7 @@ async function fetchAppliedJobs(currentPage, paginationLimit, q) {
                 </div
             </div>
 
-            <a href="./delete/${job.jobid}"> 
+            <a href="./delete/${job.jobid}">
             <button type="button" class="btn btn-danger icon delete">
                 <i class="fa-solid fa-trash"></i>
             </button>
@@ -108,7 +108,7 @@ async function fetchAppliedJobs(currentPage, paginationLimit, q) {
       &lt;
   </button>
   ${currentPage}
-  <button class="pagination-button" 
+  <button class="pagination-button"
      onClick="next(${currentPage},${paginationLimit},1,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
@@ -178,7 +178,7 @@ async function fetchAssessmentJobs(currentPage, paginationLimit, q) {
                 </div
             </div>
 
-            <a href="./delete/${job.jobid}"> 
+            <a href="./delete/${job.jobid}">
             <button type="button" class="btn btn-danger icon delete">
                 <i class="fa-solid fa-trash"></i>
             </button>
@@ -196,7 +196,7 @@ async function fetchAssessmentJobs(currentPage, paginationLimit, q) {
       &lt;
   </button>
   ${currentPage}
-  <button class="pagination-button" 
+  <button class="pagination-button"
      onClick="next(${currentPage},${paginationLimit},2,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
@@ -264,7 +264,7 @@ async function fetchInterviewJobs(currentPage, paginationLimit, q) {
 
                 </div
             </div>
-            <a href="./delete/${job.jobid}"> 
+            <a href="./delete/${job.jobid}">
                   <button type="button" class="btn btn-danger icon delete">
                       <i class="fa-solid fa-trash"></i>
                   </button>
@@ -283,7 +283,7 @@ async function fetchInterviewJobs(currentPage, paginationLimit, q) {
       &lt;
   </button>
   ${currentPage}
-  <button class="pagination-button" 
+  <button class="pagination-button"
      onClick="next(${currentPage},${paginationLimit},3,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
@@ -351,7 +351,7 @@ async function fetchStatusJobs(currentPage, paginationLimit, q) {
                 </div
             </div>
 
-            <a href="./delete/${job.jobid}"> 
+            <a href="./delete/${job.jobid}">
             <button type="button" class="btn btn-danger icon delete">
                 <i class="fa-solid fa-trash"></i>
             </button>
@@ -370,7 +370,7 @@ async function fetchStatusJobs(currentPage, paginationLimit, q) {
       &lt;
   </button>
   ${currentPage}
-  <button class="pagination-button" 
+  <button class="pagination-button"
      onClick="next(${currentPage},${paginationLimit},4,q)" id="next-button-1" title="Next page" aria-label="Next page">
       &gt;
   </button>
@@ -379,10 +379,10 @@ async function fetchStatusJobs(currentPage, paginationLimit, q) {
 }
 
 async function fetchJobs(q) {
-  fetchAppliedJobs(currentPage, paginationLimit, q);
-  fetchAssessmentJobs(currentPage2, paginationLimit2, q);
-  fetchInterviewJobs(currentPage3, paginationLimit3, q);
-  fetchStatusJobs(currentPage4, paginationLimit4, q);
+  await fetchAppliedJobs(currentPage, paginationLimit, q);
+  await fetchAssessmentJobs(currentPage2, paginationLimit2, q);
+  await fetchInterviewJobs(currentPage3, paginationLimit3, q);
+  await fetchStatusJobs(currentPage4, paginationLimit4, q);
 }
 
 function callJobs(col, currentPage, paginationLimit, q) {
@@ -410,7 +410,7 @@ async function next(currentPage, paginationLimit, col, q) {
   callJobs(col, currentPage, paginationLimit, q);
 }
 
-fetchJobs(q);
+
 
 // edit functionality
 
@@ -472,7 +472,8 @@ function ClearInput() {
 
 // drag and drop functionality
 
-window.onload = function () {
+window.onload = async function () {
+  await fetchJobs(q);
   const cards = document.querySelectorAll(".draggable");
   const columns = document.querySelectorAll(".column-box");
   const emptybox = document.querySelectorAll(".droppable");
