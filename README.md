@@ -15,6 +15,8 @@ A software to track and manage applied jobs, interviews and online assessments. 
 
 ## Class Link : https://johnguerra.co/classes/webDevelopment_fall_2022/
 
+## Design Doc : https://docs.google.com/document/d/1IUqSX9vi5SiM_4hIPd6I1NSE3D4skUKQVCzDwufzM2g/edit?usp=sharing
+
 ## Project Objectives :
 
 Job-Application-Tracker software helps the user track his/her job application process and also store their resume online.
